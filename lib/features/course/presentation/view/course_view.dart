@@ -17,9 +17,9 @@ class _CourseViewState extends ConsumerState<CourseView> {
   @override
   Widget build(BuildContext context) {
     var courseState = ref.watch(courseViewModelProvider);
-    return Scaffold(
-      body: SizedBox.expand(
-        child: Padding(
+    return SizedBox.expand(
+      child: Scaffold(
+        body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
@@ -88,27 +88,6 @@ class _CourseViewState extends ConsumerState<CourseView> {
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard),
-            label: 'Dashboard',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            label: 'Course',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.batch_prediction),
-            label: 'Batch',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
-        currentIndex: 1,
       ),
     );
   }

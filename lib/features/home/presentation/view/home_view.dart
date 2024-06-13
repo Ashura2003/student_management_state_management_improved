@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:student_management_starter/features/batch/presentation/view/batch_view.dart';
+import 'package:student_management_starter/features/course/presentation/view/course_view.dart';
+import 'package:student_management_starter/features/home/presentation/view/bottom_view/dashboard_view.dart';
+import 'package:student_management_starter/features/home/presentation/view/bottom_view/profile_view.dart';
+import 'package:student_management_starter/features/home/presentation/view_model/home_view_model.dart';
 
 class HomeView extends ConsumerWidget {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    int selectedIndex = 0;
+    List<Widget> lstScreen = [
+      const DashBoardView(),
+      const CourseView(),
+      const BatchView(),
+      const ProfileView(),
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -33,12 +46,19 @@ class HomeView extends ConsumerWidget {
           ],
         ),
       ),
-      body: const SizedBox.expand(
-        child: Center(
-          child: Text(
-            'Dashboard ',
-          ),
-        ),
+      body: const Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: Text(
+              "Home View",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          )
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
@@ -59,6 +79,22 @@ class HomeView extends ConsumerWidget {
             label: 'Profile',
           ),
         ],
+        currentIndex: selectedIndex,
+        onTap: (index) {
+          if (index == 0) {
+            ref.read(homeViewModelProvider.notifier).openHomeView();
+            selectedIndex = index;
+          } else if (index == 1) {
+            ref.read(homeViewModelProvider.notifier).openCourseView();
+            selectedIndex = index;
+          } else if (index == 2) {
+            ref.read(homeViewModelProvider.notifier).openBatchView();
+            selectedIndex = index;
+          } else {
+            ref.read(homeViewModelProvider.notifier).openHomeView();
+            selectedIndex = index;
+          }
+        },
       ),
     );
   }

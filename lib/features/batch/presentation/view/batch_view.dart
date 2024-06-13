@@ -29,8 +29,8 @@ class _BatchViewState extends ConsumerState<BatchView> {
     var batchState = ref.watch(batchViewModelProvider);
     const gap = SizedBox(height: 8);
     return SafeArea(
-      child: Scaffold(
-        body: SizedBox.expand(
+      child: Material(
+        child: SizedBox.expand(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -101,27 +101,6 @@ class _BatchViewState extends ConsumerState<BatchView> {
               ],
             ),
           ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.dashboard),
-              label: 'Dashboard',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.book),
-              label: 'Course',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.batch_prediction),
-              label: 'Batch',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
-            ),
-          ],
-          currentIndex: 2,
         ),
       ),
     );
