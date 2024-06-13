@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:student_management_starter/features/auth/domain/entity/auth_entity.dart';
@@ -20,6 +22,18 @@ class AuthViewModel extends StateNotifier<AuthState> {
 
   void obsurePassword() {
     state = state.copyWith(obscurePassword: !state.obscurePassword);
+  }
+
+  Future<void> uploadImage(File? file) async {
+    state = state.copyWith(isLoading: true);
+
+    var data = await authUseCase.uploadProfilePicture(file!);
+    data.fold((l) {
+      state = state.copyWith(isLoading: false, error: l.error);
+    }, (imageName) {
+      state =
+          state.copyWith(isLoading: false, error: null, imageName: imageName);
+    });
   }
 
   void addStudent({required AuthEntity auth}) async {

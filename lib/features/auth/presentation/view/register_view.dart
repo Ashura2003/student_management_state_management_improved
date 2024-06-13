@@ -36,6 +36,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
       if (image != null) {
         setState(() {
           _img = File(image.path);
+          ref.read(authViewModelProvider.notifier).uploadImage(_img);
         });
       } else {
         return;
